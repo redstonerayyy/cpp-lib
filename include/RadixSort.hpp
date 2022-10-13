@@ -6,8 +6,9 @@
 #define CPP_ALGOS_RADIXSORT_HPP
 
 #include <vector>
+#include <array>
 
-void CountingRoutine(std::vector<int> &_vector);
+std::vector<int> CountingRoutine(std::vector<int> &_vector, int placedivider);
 void RadixSort(std::vector<int> &_vector);
 
 #endif //CPP_ALGOS_RADIXSORT_HPP
