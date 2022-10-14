@@ -9,7 +9,7 @@ add_library(cpp_algos cpp/RadixSort.cpp cpp/DataStructureUtils.cpp)
 
 target_compile_features(cpp_algos PRIVATE cxx_std_20)
 
-add_executable(test main.cpp)
+add_executable(test test.cpp)
 
 target_compile_features(test PRIVATE cxx_std_20)
 

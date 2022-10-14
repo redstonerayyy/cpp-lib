@@ -9,15 +9,13 @@
 #include <iostream>
 
 // count occurence of digit at certain positon determined by placedivider
-std::vector<int> CountingRoutine(std::vector<int> &_vector, int placedivider){
+void CountingRoutine(std::vector<int> &_vector, int placedivider, int start, int end, std::vector<int> &_counters){
     // count digits 0 - 9
-    std::vector<int> counters(10, 0);
-    for (int i : _vector) {
+    for (int i = start; i <= end; ++i) {
         // get digit at certain place, e. g. 303/10 = 30.3, 30.3 % 10 = 0
         // digit at second position from the right is 0
-        counters[ (i/placedivider) % 10 ]++;
+        _counters[ (i/placedivider) % 10 ]++;
     }
-    return counters;
 }
 
 // the one and only superfast radix sort
@@ -33,7 +31,8 @@ void RadixSort(std::vector<int> &_vector) {
     // stop if no digits are at this position
     while(max/digitplace > 0){
         // calculate counters, return a 10 element vector
-        std::vector<int> counters = CountingRoutine(_vector, digitplace);
+        std::vector<int> counters(10, 0); 
+        CountingRoutine(_vector, digitplace, 0, _vector.size() - 1, counters);
         // apply prefixsum to this vector
         PrefixSum(counters);
         //rebuilt the new array based on this sorting pass
@@ -41,6 +40,7 @@ void RadixSort(std::vector<int> &_vector) {
             // get the value of the prefixsum array at the position
             // for the current digit and subtract 1 from it,
             // so it points to the true index
+            std::cout << (_vector[i]/digitplace) % 10 << std::endl;
             counters[ (_vector[i]/digitplace) % 10 ]--;
             // place the element of the original vector at this position
             // which is now in the prefixsum array, so it is at the right
