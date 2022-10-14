@@ -15,7 +15,6 @@ int main() {
     std::vector<int> test;
 
     for(int i = 0; i < 100; ++i){
-        int random = std::rand();
         test.push_back(distr(gen));
     }
 
@@ -27,9 +26,9 @@ int main() {
     auto sortstart = std::chrono::high_resolution_clock::now();
     
     RadixSort(test);
-    // for (int i : test) {
-    //     std::cout << i << std::endl;
-    // }
+//     for (int i : test) {
+//         std::cout << i << std::endl;
+//     }
 
     auto sortstop = std::chrono::high_resolution_clock::now();
 

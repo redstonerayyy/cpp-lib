@@ -4,6 +4,8 @@
 
 #include "DataStructureUtils.hpp"
 
+#include <iostream>
+
 // find largest value in vector
 int GetMax(std::vector<int> &_vector){
     int max = _vector[0];
