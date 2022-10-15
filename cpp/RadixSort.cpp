@@ -11,7 +11,9 @@
 // count occurence of digit at certain positon determined by placedivider
 void CountingRoutine(std::vector<int> &_vector, int placedivider, int start, int end, std::vector<int> &_counters_array, int counters_start){
     // count digits 0 - 9
-    for (int i = start; i <= end; ++i) {
+    std::cout << start << ":" << end << "\n";
+    for (int i = start; i < end; ++i) {
+
         // get digit at certain place, e. g. 303/10 = 30.3, 30.3 % 10 = 0
         // digit at second position from the right is 0
         _counters_array[ counters_start + (_vector[i]/placedivider) % 10 ]++;
@@ -37,10 +39,10 @@ void RadixSort(std::vector<int> &_vector) {
         int range_per_thread = int(_vector.size() / 10);
         int additional = int(_vector.size() % 10);
         // last thread uses additional
-        threads[9] = std::thread (CountingRoutine, std::ref(_vector), digitplace, 0, 10 + additional, std::ref(counters_array), 9 * 10);
+        threads[9] = std::thread (CountingRoutine, std::ref(_vector), digitplace, 9 * range_per_thread, 9 * range_per_thread + range_per_thread + additional, std::ref(counters_array), 9 * 10);
         for(int i = 0; i < 9; ++i){
             // calculate counters, return a 10 element vector
-            threads[i] = std::thread (CountingRoutine, std::ref(_vector), digitplace, i * range_per_thread, i * range_per_thread + 10, std::ref(counters_array), i * 10);
+            threads[i] = std::thread (CountingRoutine, std::ref(_vector), digitplace, i * range_per_thread, i * range_per_thread + range_per_thread, std::ref(counters_array), i * 10);
         }
 
         // join the threads
@@ -57,10 +59,10 @@ void RadixSort(std::vector<int> &_vector) {
             }
         }
 
-        PrintIterator(counters_array);
-
         // apply prefixsum to this vector
         PrefixSum(counters);
+
+        std::cout << "starting rebuild" << std::endl;
         //rebuilt the new array based on this sorting pass
         for (int i = int(_vector.size()) - 1; i >= 0; i--) {
             // get the value of the prefixsum array at the position
@@ -73,19 +75,12 @@ void RadixSort(std::vector<int> &_vector) {
             result[ counters[ (_vector[i]/digitplace) % 10 ] ] = _vector[i];
         }
 
-        PrintIterator(counters_array);
-
         // copy to original array
         for (unsigned long i = 0; i < _vector.size(); ++i) {
             _vector[i] = result[i];
         }
-
-        std::cout << &counters << std::endl;
-        std::cout << &counters_array << std::endl;
-        PrintIterator(counters);
-        PrintIterator(counters_array);
+        std::cout << "ending rebuild" << std::endl;
 
         digitplace *= 10;
     }
-//    std::cout << "sdf" << std::endl;
 }

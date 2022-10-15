@@ -32,3 +32,10 @@ void PrefixSum(std::vector<int> &_vector){
         _vector[i] = _vector[i - 1] + _vector[i];
     }
 }
+
+void PrintVector(std::vector<int> &_vector){
+    for (int i : _vector) {
+        std::cout << i << " ";
+    }
+    std::cout << "\n";
+}

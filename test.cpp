@@ -14,7 +14,7 @@ int main() {
 
     std::vector<int> test;
 
-    for(int i = 0; i < 100; ++i){
+    for(int i = 0; i < 100000000; ++i){
         test.push_back(distr(gen));
     }
 
