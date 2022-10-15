@@ -10,7 +10,7 @@ int main() {
 
     std::random_device rd; // obtain a random number from hardware
     std::mt19937 gen(rd()); // seed the generator
-    std::uniform_int_distribution<> distr(1, 100); // define the range
+    std::uniform_int_distribution<> distr(1, 100000000); // define the range
 
     std::vector<int> test;
 

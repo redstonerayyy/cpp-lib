@@ -68,11 +68,12 @@ void RadixSort(std::vector<int> &_vector) {
             // get the value of the prefixsum array at the position
             // for the current digit and subtract 1 from it,
             // so it points to the true index
-            counters[ (_vector[i]/digitplace) % 10 ]--;
+            int digit = (_vector[i]/digitplace) % 10;
+            counters[ digit ]--;
             // place the element of the original vector at this position
             // which is now in the prefixsum array, so it is at the right
             // position for this digit pass
-            result[ counters[ (_vector[i]/digitplace) % 10 ] ] = _vector[i];
+            result[ counters[ digit ] ] = _vector[i];
         }
 
         // copy to original array
