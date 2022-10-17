@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.23)
 project(cpp_algos)
 
-#set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 20)
 
 include_directories(include)
 
-add_library(cpp_algos cpp/RadixSort.cpp cpp/DataStructureUtils.cpp)
+add_library(cpp_algos cpp/RadixSort.cpp cpp/DataStructureUtils.cpp cpp/RadixSortMultithreaded.cpp)
 
 target_compile_features(cpp_algos PRIVATE cxx_std_20)
 

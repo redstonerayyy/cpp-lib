@@ -3,18 +3,18 @@
 #include <random>
 #include <chrono>
 
-#include "RadixSort.hpp"
+#include "RadixSortMultithreaded.hpp"
 
 int main() {
     auto genstart = std::chrono::high_resolution_clock::now();
 
     std::random_device rd; // obtain a random number from hardware
     std::mt19937 gen(rd()); // seed the generator
-    std::uniform_int_distribution<> distr(1, 100000000); // define the range
+    std::uniform_int_distribution<> distr(1, 10); // define the range
 
     std::vector<int> test;
 
-    for(int i = 0; i < 100000000; ++i){
+    for(int i = 0; i < 100; ++i){
         test.push_back(distr(gen));
     }
 
@@ -25,7 +25,7 @@ int main() {
 
     auto sortstart = std::chrono::high_resolution_clock::now();
     
-    RadixSort(test);
+    RadixSortMultithreaded(test);
 //     for (int i : test) {
 //         std::cout << i << std::endl;
 //     }

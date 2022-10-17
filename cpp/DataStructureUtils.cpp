@@ -7,15 +7,27 @@
 #include <iostream>
 
 // find largest value in vector
-int GetMax(std::vector<int> &_vector){
+int GetMaxRange(std::vector<int> &_vector, int start, int end){
     int max = _vector[0];
-    for(int i : _vector){
-        if(i > max){
+    for (int i = start; i < end; ++i) {
+        if(_vector[i] > max){
             max = i;
         }
     }
     return max;
 }
+
+// find largest value in vector
+int GetMax(std::vector<int> &_vector){
+    int max = _vector[0];
+    for (int i = 0; i < _vector.size(); ++i) {
+        if(_vector[i] > max){
+            max = i;
+        }
+    }
+    return max;
+}
+
 
 // swap to elements, modifies the referenced vector
 void SwapElements(std::vector<int> &_vector, int index1, int index2){
