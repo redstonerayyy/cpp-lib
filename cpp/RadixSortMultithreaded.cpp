@@ -19,7 +19,7 @@ void MergeVectorParts(std::vector<int> &_vector, std::vector<std::pair<int, int>
         binary_heap.at(i) = { i, _vector.at(_parts.at(i).first) };
         _parts.at(i).first++;
     }
-    // sort binary heap
+    // sort binary heap for the first time to get the first value for the final list
     for (int i = 1; i < binary_heap.size(); ++i) {
         int j = i;
         while(binary_heap.at(int( (j - 1) / 2 )).second > binary_heap.at(j).second) {
@@ -30,18 +30,16 @@ void MergeVectorParts(std::vector<int> &_vector, std::vector<std::pair<int, int>
             j = int( (j - 1) / 2 );
         }
     }
-    for (auto i: binary_heap) {
-        std::cout << i.first << ":" << i.second << "\n";
-    }
 
     // fill merged list
+    // hold position where next element needs to go
     int fillindex = 0;
-    while(binary_heap.at(0).second < 1000){
+    while(binary_heap.at(0).second < std::numeric_limits<int>::max()){
         // store array id of the first element
         std::pair<int, int> heapfirst = binary_heap.at(0);
         // add the smallest element in heap to final array
         merged.at(fillindex) = heapfirst.second;
-        std::cout << heapfirst.first << ":" << _parts.at(heapfirst.first).first << ":" << _parts.at(heapfirst.first).second << "\n";
+//        std::cout << heapfirst.first << ":" << _parts.at(heapfirst.first).first << ":" << _parts.at(heapfirst.first).second << "\n";
         // check if there is an element left in the lift, where the current elemement got removed
         if (_parts.at(heapfirst.first).first < _parts.at(heapfirst.first).second){
             // replace the current element with this element and increment the counter
@@ -50,7 +48,7 @@ void MergeVectorParts(std::vector<int> &_vector, std::vector<std::pair<int, int>
             _parts.at(heapfirst.first).first++;
         } else {
             // mark this list as finished by setting the value to the "infinity"
-            binary_heap.at(0).second = 1000;// std::numeric_limits<int>::max();
+            binary_heap.at(0).second = std::numeric_limits<int>::max();
         }
         // sort again
         for (int i = 1; i < binary_heap.size(); ++i) {
@@ -63,19 +61,15 @@ void MergeVectorParts(std::vector<int> &_vector, std::vector<std::pair<int, int>
                 j = int( (j - 1) / 2 );
             }
         }
-        for (auto i: binary_heap) {
-            std::cout << i.first << ":" << i.second << "\n";
-        }
-        std::cout << "fill" << fillindex << std::endl;
+        // set next element position
         fillindex++;
     }
-    PrintVector(merged);
+    // PrintVector(merged);
 }
 
 // count occurence of digit at certain positon determined by placedivider
 void CountingRoutine(std::vector<int> &_vector, std::vector<int> &_counters, int placedivider, int start, int end){
     // count digits 0 - 9
-    // std::cout << start << ":" << end << "\n";
     for (int i = start; i < end; ++i) {
 
         // get digit at certain place, e. g. 303/10 = 30.3, 30.3 % 10 = 0
@@ -85,8 +79,8 @@ void CountingRoutine(std::vector<int> &_vector, std::vector<int> &_counters, int
 }
 
 void RadixSortMultithreaded(std::vector<int> &_vector){
-    std::vector<int> result(_vector.size());
-
+    std::vector<int> result(_vector.size()); // create result vector
+    // threading initiliazation
     int threadcount = 10;
     std::vector<std::pair<int, int>> parts(threadcount);
     std::vector<std::thread> threads(threadcount);
@@ -108,11 +102,8 @@ void RadixSortMultithreaded(std::vector<int> &_vector){
         threads[i].join();
     }
 
-
-
-    //parts of array are sorted
-    PrintVector(_vector);
-//    MergeVectorParts(_vector, parts);
+    // merge these sorted parts of the vector with a binary heap
+    MergeVectorParts(_vector, parts);
 }
 
 // the one and only superfast radix sort
@@ -124,7 +115,6 @@ void RadixSort(std::vector<int> &_vector, std::vector<int> &_result, int start, 
 
     // stop if no digits are at this position
     while(max/digitplace > 0){
-
         // add up results of the threads
         std::vector<int> counters(10, 0);
         CountingRoutine(_vector, counters, digitplace, start, end);

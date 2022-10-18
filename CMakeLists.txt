@@ -3,6 +3,8 @@ project(cpp_algos)
 
 set(CMAKE_CXX_STANDARD 20)
 
+set(CMAKE_CXX_FLAGS "-O2 -march=native")
+
 include_directories(include)
 
 add_library(cpp_algos cpp/RadixSort.cpp cpp/DataStructureUtils.cpp cpp/RadixSortMultithreaded.cpp)

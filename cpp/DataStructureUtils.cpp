@@ -11,7 +11,7 @@ int GetMaxRange(std::vector<int> &_vector, int start, int end){
     int max = _vector[0];
     for (int i = start; i < end; ++i) {
         if(_vector[i] > max){
-            max = i;
+            max = _vector[i];
         }
     }
     return max;
