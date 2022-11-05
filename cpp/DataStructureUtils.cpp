@@ -22,7 +22,7 @@ int GetMax(std::vector<int> &_vector){
     int max = _vector[0];
     for (int i = 0; i < _vector.size(); ++i) {
         if(_vector[i] > max){
-            max = i;
+            max = _vector[i];
         }
     }
     return max;
