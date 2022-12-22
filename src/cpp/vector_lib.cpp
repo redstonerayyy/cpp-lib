@@ -1,9 +1,4 @@
-//
-// Created by anton on 12/10/22.
-//
-
 #include "DataStructureUtils.hpp"
-
 #include <iostream>
 
 // find largest value in vector
@@ -28,23 +23,31 @@ int GetMax(std::vector<int> &_vector){
     return max;
 }
 
-
-// swap to elements, modifies the referenced vector
-void SwapElements(std::vector<int> &_vector, int index1, int index2){
-    // https://www.tutorialspoint.com/how-to-swap-two-arrays-without-using-temporary-variable-in-c-language
-    // use in place swap trick without temporary variable
+// swap two elements, modifies the referenced vector
+// https://www.tutorialspoint.com/how-to-swap-two-arrays-without-using-temporary-variable-in-c-language
+// use in place swap trick without temporary variable
+void SwapElementsInt(std::vector<int> &_vector, int index1, int index2){
     _vector[index1] = _vector[index1] + _vector[index2];
     _vector[index2] = _vector[index1] - _vector[index2];
     _vector[index1] = _vector[index1] - _vector[index2];
 }
 
-// calculate prefixsum on a vector
+// swap two elements regardless of type or value
+template <typename T>
+void SwapElements(std::vector<T> &_vector, int index1, int index2){
+    T temp = _vector[index1];
+    _vector[index1] = _vector[index2];
+    _vector[index2] = temp;
+}
+
+// calculate prefixsum on a vector of intergers
 void PrefixSum(std::vector<int> &_vector){
     for (int i = 1; i < _vector.size(); ++i) {
         _vector[i] = _vector[i - 1] + _vector[i];
     }
 }
 
+// print elements of a vector seperated by a " "
 void PrintVector(std::vector<int> &_vector){
     for (int i : _vector) {
         std::cout << i << " ";
