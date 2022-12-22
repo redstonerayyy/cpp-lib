@@ -1,9 +1,5 @@
-//
-// Created by anton on 17/10/22.
-//
-
-#include "RadixSortMultithreaded.hpp"
-#include "DataStructureUtils.hpp"
+#include "radixsort_thread_complex.hpp"
+#include "vector_lib.hpp"
 
 #include <thread>
 #include <limits>
@@ -78,7 +74,7 @@ void CountingRoutine(std::vector<int> &_vector, std::vector<int> &_counters, int
     }
 }
 
-void RadixSortMultithreaded(std::vector<int> &_vector){
+void RadixSortComplexThread(std::vector<int> &_vector){
     std::vector<int> result(_vector.size()); // create result vector
     // threading initiliazation
     int threadcount = 10;

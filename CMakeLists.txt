@@ -1,18 +1,24 @@
+# probably works with lower versions
 cmake_minimum_required(VERSION 3.23)
-project(cpp_algos)
+project(cpp_lib)
 
+# modern and fast
 set(CMAKE_CXX_STANDARD 20)
-
 set(CMAKE_CXX_FLAGS "-O2 -march=native")
 
-include_directories(include)
+# files
+FILE(GLOB SOURCE_STABLE src/cpp/stable/*.cpp)
+FILE(GLOB SOURCE_EXEPERIMENTAL src/cpp/experimental/*.cpp)
 
-add_library(cpp_algos cpp/RadixSort.cpp cpp/DataStructureUtils.cpp cpp/RadixSortMultithreaded.cpp)
+# stable
+add_library(cpplibstable ${SOURCE_STABLE})
+target_include_directories(cpplibstable PRIVATE
+	src/include/stable
+)
 
-target_compile_features(cpp_algos PRIVATE cxx_std_20)
-
-add_executable(test test.cpp)
-
-target_compile_features(test PRIVATE cxx_std_20)
-
-target_link_libraries(test PRIVATE cpp_algos)
+# experimental
+add_library(cpplibexperimental ${SOURCE_EXEPERIMENTAL} ${SOURCE_STABLE})
+target_include_directories(cpplibexperimental PRIVATE
+	src/include/stable
+	src/include/experimental
+)

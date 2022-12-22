@@ -1,7 +1,9 @@
-#include "DataStructureUtils.hpp"
-#include <iostream>
+#include "vector_lib.hpp"
 
-// find largest value in vector
+#include <iostream>
+#include <vector>
+
+// find largest value in vector integers
 int GetMaxRange(std::vector<int> &_vector, int start, int end){
     int max = _vector[0];
     for (int i = start; i < end; ++i) {
@@ -12,7 +14,7 @@ int GetMaxRange(std::vector<int> &_vector, int start, int end){
     return max;
 }
 
-// find largest value in vector
+// find largest value in vector of integers
 int GetMax(std::vector<int> &_vector){
     int max = _vector[0];
     for (int i = 0; i < _vector.size(); ++i) {
@@ -48,8 +50,9 @@ void PrefixSum(std::vector<int> &_vector){
 }
 
 // print elements of a vector seperated by a " "
-void PrintVector(std::vector<int> &_vector){
-    for (int i : _vector) {
+template <typename T>
+void PrintVector(std::vector<T> &_vector){
+    for (T i : _vector) {
         std::cout << i << " ";
     }
     std::cout << "\n";

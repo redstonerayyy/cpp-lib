@@ -1,17 +1,13 @@
-//
-// Created by anton on 12/10/22.
-//
 // https://www.codingeek.com/algorithms/radix-sort-explanation-pseudocode-and-implementation/
 
-#include "RadixSort.hpp"
-#include "DataStructureUtils.hpp"
+#include "radixsort_thread_simple.hpp"
+#include "vector_lib.hpp"
 
 #include <thread>
 
 // count occurence of digit at certain positon determined by placedivider
 void CountingRoutine(std::vector<int> &_vector, int placedivider, int start, int end, std::vector<int> &_counters_array, int counters_start){
     // count digits 0 - 9
-    std::cout << start << ":" << end << "\n";
     for (int i = start; i < end; ++i) {
 
         // get digit at certain place, e. g. 303/10 = 30.3, 30.3 % 10 = 0
@@ -21,7 +17,7 @@ void CountingRoutine(std::vector<int> &_vector, int placedivider, int start, int
 }
 
 // the one and only superfast radix sort
-void RadixSort(std::vector<int> &_vector) {
+void RadixSortSimpleThread(std::vector<int> &_vector) {
     // start at right most digit
     int digitplace = 1;
     // resulting array, will be used in the algorithm to store partially
@@ -62,7 +58,6 @@ void RadixSort(std::vector<int> &_vector) {
         // apply prefixsum to this vector
         PrefixSum(counters);
 
-        std::cout << "starting rebuild" << std::endl;
         //rebuilt the new array based on this sorting pass
         for (int i = int(_vector.size()) - 1; i >= 0; i--) {
             // get the value of the prefixsum array at the position
@@ -80,7 +75,6 @@ void RadixSort(std::vector<int> &_vector) {
         for (unsigned long i = 0; i < _vector.size(); ++i) {
             _vector[i] = result[i];
         }
-        std::cout << "ending rebuild" << std::endl;
 
         digitplace *= 10;
     }

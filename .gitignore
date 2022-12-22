@@ -1,2 +1,6 @@
+# build folder intellij
 /cmake-build-debug
+# build folder cmake
 /build
+# vs code settings
+/.vscode
