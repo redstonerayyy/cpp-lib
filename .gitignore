@@ -6,3 +6,6 @@
 
 # vs code settings
 /.vscode
+
+# test output
+/runtests

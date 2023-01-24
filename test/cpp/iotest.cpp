@@ -8,5 +8,5 @@ void TestIO(){
     // std::string data = IO::ReadFileIntoString("filetoread.txt"); // not implemented yet
     // std::cout << (data == "Read this file!") << "\n"
     std::string content = "Write this file!";
-    IO::WriteStringToFile("filetowrite.txt", content);
+    IO::WriteStringToFile("runtests/filetowrite.txt", content);
 }

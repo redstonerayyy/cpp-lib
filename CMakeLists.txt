@@ -9,7 +9,7 @@ set(CMAKE_CXX_FLAGS "-O2 -std=c++20")
 FILE(GLOB_RECURSE SOURCE_FILES src/cpp/*.cpp)
 
 # stable
-add_library(cpplib ${SOURCE_FILES})
+add_library(cpplib SHARED ${SOURCE_FILES})
 target_include_directories(cpplib PRIVATE
 	src/include
 )
@@ -22,4 +22,6 @@ target_include_directories(testlib PRIVATE
     src/include
 )
 
-target_link_libraries(testlib cpplib)
+target_link_libraries(testlib PRIVATE 
+    cpplib
+)

@@ -20,6 +20,7 @@ T GetMax(std::vector<T> &vector){
             max = vector.at(i);
         }
     }
+    return max;
 };
 
 template <typename T>
@@ -32,5 +33,11 @@ T GetMaxInRange(std::vector<T> &vector, std::uint64_t start, std::uint64_t end){
         }
     }
 };
+
+template short Max::GetMax<short>(std::vector<short> &vector);
+template int Max::GetMax<int>(std::vector<int> &vector);
+template long Max::GetMax<long>(std::vector<long> &vector);
+template float Max::GetMax<float>(std::vector<float> &vector);
+template double Max::GetMax<double>(std::vector<double> &vector);
 
 }
