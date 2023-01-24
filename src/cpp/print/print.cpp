@@ -5,7 +5,7 @@ It's functions should only be used with types which can be printed with
 std::cout.
 */
 
-#include "vector/print.hpp"
+#include "print/print.hpp"
 
 #include <cstdint>
 #include <vector>

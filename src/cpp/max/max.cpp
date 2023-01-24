@@ -4,7 +4,7 @@ of different types. It's functions should only be used with numeric values
 (int, double, ...) because it uses the standard comparison operator '>' .
 */
 
-#include "vector/max.hpp"
+#include "max/max.hpp"
 
 #include <cstdint>
 #include <vector>

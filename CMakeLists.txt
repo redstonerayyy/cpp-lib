@@ -13,3 +13,13 @@ add_library(cpplib ${SOURCE_FILES})
 target_include_directories(cpplib PRIVATE
 	src/include
 )
+
+# test target
+FILE(GLOB_RECURSE TEST_FILES test/cpp/*.cpp)
+
+add_executable(testlib test/main.cpp ${TEST_FILES})
+target_include_directories(testlib PRIVATE
+    src/include
+)
+
+target_link_libraries(testlib cpplib)
