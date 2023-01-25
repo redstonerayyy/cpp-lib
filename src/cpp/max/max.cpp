@@ -23,6 +23,12 @@ T GetMax(std::vector<T> &vector){
     return max;
 };
 
+template short Max::GetMax<short>(std::vector<short> &vector);
+template int Max::GetMax<int>(std::vector<int> &vector);
+template long Max::GetMax<long>(std::vector<long> &vector);
+template float Max::GetMax<float>(std::vector<float> &vector);
+template double Max::GetMax<double>(std::vector<double> &vector);
+
 template <typename T>
 T GetMaxInRange(std::vector<T> &vector, std::uint64_t start, std::uint64_t end){
     T max = vector.at(0);
@@ -34,10 +40,10 @@ T GetMaxInRange(std::vector<T> &vector, std::uint64_t start, std::uint64_t end){
     }
 };
 
-template short Max::GetMax<short>(std::vector<short> &vector);
-template int Max::GetMax<int>(std::vector<int> &vector);
-template long Max::GetMax<long>(std::vector<long> &vector);
-template float Max::GetMax<float>(std::vector<float> &vector);
-template double Max::GetMax<double>(std::vector<double> &vector);
+template short GetMaxInRange<short>(std::vector<short> &vector, std::uint64_t start, std::uint64_t end);
+template int GetMaxInRange<int>(std::vector<int> &vector, std::uint64_t start, std::uint64_t end);
+template long GetMaxInRange<long>(std::vector<long> &vector, std::uint64_t start, std::uint64_t end);
+template float GetMaxInRange<float>(std::vector<float> &vector, std::uint64_t start, std::uint64_t end);
+template double GetMaxInRange<double>(std::vector<double> &vector, std::uint64_t start, std::uint64_t end);
 
 }
